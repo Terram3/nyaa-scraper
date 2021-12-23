@@ -4,7 +4,9 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     Scraper scrape = new Scraper();
-    scrape.setLink("https://nyaa.si/");
+    scrape.engSubSearch("sekai");
+    scrape.scrapePageByTag("SubsPlease");
+    scrape.resetLink();
     scrape.scrapePageByTag("SubsPlease");
   }
 }

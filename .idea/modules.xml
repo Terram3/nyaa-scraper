@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/nyaa-proj.iml" filepath="$PROJECT_DIR$/nyaa-proj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/nyaa-scraper.iml" filepath="$PROJECT_DIR$/.idea/nyaa-scraper.iml" />
     </modules>
   </component>
 </project>

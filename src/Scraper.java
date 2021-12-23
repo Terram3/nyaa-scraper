@@ -7,13 +7,17 @@ import org.jsoup.select.Elements;
 public class Scraper {
 
   Document html;
-  String link;
+  String link = "https://nyaa.si/";
 
   public Scraper() {
-    // TODO: search before filter
+    /* TODO: search before filter */
   }
 
-  public void setLink(String link) throws IOException {
+  public void resetLink() throws IOException {
+    connectLink(link.substring(0, 16));
+  }
+
+  public void connectLink(String link) throws IOException {
     if (link == null) {
       throw new IllegalArgumentException();
     }
@@ -21,8 +25,8 @@ public class Scraper {
     html = Jsoup.connect(link).get();
   }
 
-  public void engSubSearch(String search){
-    link = link + search;
+  public void engSubSearch(String search) throws IOException {
+    connectLink(link + "?f=0&c=1_2&q=" + search);
   }
 
   public void scrapePageByTag(String tag) {
