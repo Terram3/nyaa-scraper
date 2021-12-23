@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.Locale;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +12,7 @@ public class Scraper {
   String link = "https://nyaa.si/";
 
   public Scraper() {
-    /* TODO: search before filter */
+    /* TODO: search more than one word */
   }
 
   public void resetLink() throws IOException {
@@ -26,28 +28,47 @@ public class Scraper {
   }
 
   public void engSubSearch(String search) throws IOException {
+    link = "https://nyaa.si/";
+    search = search.replace(" ", "+");
     connectLink(link + "?f=0&c=1_2&q=" + search);
+  }
+
+  public void engTrustedSubSearch(String search) throws IOException {
+    link = "https://nyaa.si/";
+    search = search.replace(" ", "+");
+    connectLink(link + "?f=2&c=1_2&q=" + search);
   }
 
   public void scrapePageByTag(String tag) {
     Elements fuck = html.select("a[href]");
-    searchList(tag, fuck);
+    searchList(tag, fuck, "");
   }
 
-  private void searchList(String tag, Elements fuck) {
+  public void scrapePage(String tag, String search) {
+    Elements fuck = html.select("a[href]");
+    searchList(tag, fuck, "");
+  }
+//TODO: Fix several word search, special signs and smarter search ;)
+  private void searchList(String tag, Elements fuck, String search) {
     boolean temp = false;
     for (Element e : fuck) {
       String titleName = e.attr("title");
       String subLink = e.attr("href");
-      if (titleName.contains(tag)) {
-        System.out.println(titleName + System.lineSeparator() + link.substring(0, link.length() - 1) + subLink);
+      if (filterNonTorrentLinks(tag, search, titleName, subLink)) {
+        System.out.println(titleName + System.lineSeparator() + link.substring(0, 15) + subLink);
         temp = true;
-      } else if(subLink.contains("p=")){
-        System.out.println(link.substring(0, link.length() - 1) + subLink);
+      /* will use this eventually, for finding next pages.
+        } else if(subLink.contains("p=")){
+        System.out.println(link.substring(0, link.length() - 1) + subLink);*/
       } else if(subLink.contains("magnet") && temp){
-        System.out.println(e.attr("href"));
+        System.out.println(e.attr("href") + System.lineSeparator());
         temp = false;
       }
     }
+  }
+
+  private boolean filterNonTorrentLinks(String tag, String search, String titleName, String subLink) {
+    return subLink.contains(search) && titleName.toLowerCase(Locale.ROOT).contains(tag.toLowerCase(Locale.ROOT))
+            && titleName.equals("") && subLink.contains("view") && !subLink.contains("comment");
   }
 }
