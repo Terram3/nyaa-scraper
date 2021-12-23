@@ -8,12 +8,8 @@ import org.jsoup.select.Elements;
 
 public class Scraper {
 
-  Document html;
-  String link = "https://nyaa.si/";
-
-  public Scraper() {
-    /* TODO: search more than one word */
-  }
+  private Document html;
+  private String link = "https://nyaa.si/";
 
   public void resetLink() throws IOException {
     connectLink(link.substring(0, 16));
@@ -69,6 +65,6 @@ public class Scraper {
 
   private boolean filterNonTorrentLinks(String tag, String search, String titleName, String subLink) {
     return subLink.contains(search) && titleName.toLowerCase(Locale.ROOT).contains(tag.toLowerCase(Locale.ROOT))
-            && titleName.equals("") && subLink.contains("view") && !subLink.contains("comment");
+            && !titleName.equals("") && subLink.contains("view") && !subLink.contains("comment");
   }
 }

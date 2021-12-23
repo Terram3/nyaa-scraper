@@ -9,14 +9,13 @@ public class Main {
         int alternative;
         boolean temp = true;
         String menu = """
-                1. Scrape after searching for english subs(allows filter by tag).
-                2. Scrape after searching for english subs with only trusted uploaders.
+                1. Scrape after searching for english subs.
+                2. Scrape after searching for english subs with trusted uploader.
                 3. Print menu again
                 4. Exit program
                 """;
         System.out.print(menu);
         while (temp) {
-            //TODO : scanner wrapper to avoid the nextLine bug / feature with added method.
             alternative = scan.nextInt();
             scan.nextLine();
             switch (alternative) {
