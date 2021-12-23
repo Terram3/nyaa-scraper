@@ -16,6 +16,7 @@ public class Main {
                 """;
         System.out.print(menu);
         while (temp) {
+            System.out.print("New command input: ");
             alternative = scan.nextInt();
             scan.nextLine();
             switch (alternative) {

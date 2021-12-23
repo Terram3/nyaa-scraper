@@ -37,20 +37,16 @@ public class Scraper {
 
   public void scrapePageByTag(String tag) {
     Elements fuck = html.select("a[href]");
-    searchList(tag, fuck, "");
+    searchList(tag, fuck);
   }
 
-  public void scrapePage(String tag, String search) {
-    Elements fuck = html.select("a[href]");
-    searchList(tag, fuck, "");
-  }
 //TODO: Fix several word search, special signs and smarter search ;)
-  private void searchList(String tag, Elements fuck, String search) {
+  private void searchList(String tag, Elements fuck) {
     boolean temp = false;
     for (Element e : fuck) {
       String titleName = e.attr("title");
       String subLink = e.attr("href");
-      if (filterNonTorrentLinks(tag, search, titleName, subLink)) {
+      if (filterNonTorrentLinks(tag, titleName, subLink)) {
         System.out.println(titleName + System.lineSeparator() + link.substring(0, 15) + subLink);
         temp = true;
       /* will use this eventually, for finding next pages.
@@ -63,8 +59,8 @@ public class Scraper {
     }
   }
 
-  private boolean filterNonTorrentLinks(String tag, String search, String titleName, String subLink) {
-    return subLink.contains(search) && titleName.toLowerCase(Locale.ROOT).contains(tag.toLowerCase(Locale.ROOT))
+  private boolean filterNonTorrentLinks(String tag, String titleName, String subLink) {
+    return titleName.toLowerCase(Locale.ROOT).contains(tag.toLowerCase(Locale.ROOT))
             && !titleName.equals("") && subLink.contains("view") && !subLink.contains("comment");
   }
 }
