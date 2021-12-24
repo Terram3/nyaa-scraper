@@ -11,8 +11,9 @@ public class Main {
         String menu = """
                 1. Scrape after searching for english subs.
                 2. Scrape after searching for english subs with trusted uploader.
-                3. Print menu again
-                4. Exit program
+                3. Scrape front page
+                7. Print menu again
+                8. Exit program
                 """;
         System.out.print(menu);
         while (temp) {
@@ -32,8 +33,17 @@ public class Main {
                     System.out.print("Filter by subtag(can be left empty): ");
                     scrape.scrapePageByTag(scan.nextLine());
                 }
-                case 3 -> System.out.print(menu);
+                case 3 -> {
+                    System.out.print("Filter by subtag(can be left empty): ");
+                    scrape.scrapePageByTag(scan.nextLine());
+                }
                 case 4 -> {
+                    scrape.engTrustedSubSearch("");
+                    System.out.print("Filter by subtag(can be left empty): ");
+                    scrape.scrapePageByTag(scan.nextLine());
+                }
+                case 7 -> System.out.print(menu);
+                case 8 -> {
                     temp = false;
                     System.out.println("Thanks for using the program >^_^> :)");
                 }
