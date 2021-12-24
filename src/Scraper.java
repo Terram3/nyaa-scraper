@@ -40,7 +40,7 @@ public class Scraper {
     searchList(tag, fuck);
   }
 
-//TODO: Fix several word search, special signs and smarter search ;)
+//TODO: special signs and smarter search ;)
   private void searchList(String tag, Elements fuck) {
     boolean temp = false;
     for (Element e : fuck) {
@@ -49,9 +49,6 @@ public class Scraper {
       if (filterNonTorrentLinks(tag, titleName, subLink)) {
         System.out.println(titleName + System.lineSeparator() + link.substring(0, 15) + subLink);
         temp = true;
-      /* will use this eventually, for finding next pages.
-        } else if(subLink.contains("p=")){
-        System.out.println(link.substring(0, link.length() - 1) + subLink);*/
       } else if(subLink.contains("magnet") && temp){
         System.out.println(e.attr("href") + System.lineSeparator());
         temp = false;

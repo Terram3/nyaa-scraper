@@ -5,6 +5,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Scraper scrape = new Scraper();
+        ScraperSeasonal season = new ScraperSeasonal();
         Scanner scan = new Scanner(System.in);
         int alternative;
         boolean temp = true;
@@ -12,6 +13,8 @@ public class Main {
                 1. Scrape after searching for english subs.
                 2. Scrape after searching for english subs with trusted uploader.
                 3. Scrape front page
+                4. Scrape trusted eng subs front page
+                5. Show current season anime
                 7. Print menu again
                 8. Exit program
                 """;
@@ -34,6 +37,7 @@ public class Main {
                     scrape.scrapePageByTag(scan.nextLine());
                 }
                 case 3 -> {
+                    scrape.resetLink();
                     System.out.print("Filter by subtag(can be left empty): ");
                     scrape.scrapePageByTag(scan.nextLine());
                 }
@@ -42,6 +46,8 @@ public class Main {
                     System.out.print("Filter by subtag(can be left empty): ");
                     scrape.scrapePageByTag(scan.nextLine());
                 }
+                case 5 -> season.getTitleList();
+
                 case 7 -> System.out.print(menu);
                 case 8 -> {
                     temp = false;
