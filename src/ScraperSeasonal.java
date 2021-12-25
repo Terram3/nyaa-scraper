@@ -6,12 +6,24 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class ScraperSeasonal {
-    //TODO: Setup scrap for seasonal top 20 anime, eventual filters for info might be c00l
-    public void getTitleList() throws IOException {
-        Document html = Jsoup.connect("https://myanimelist.net/anime/season").get();
+
+    private Document html;
+
+    public void connectLink() throws IOException {
+        html = Jsoup.connect("https://myanimelist.net/anime/season").get();
+    }
+
+    public void currentSeason(int amount){
         Elements list = html.select("a.link-title");
+        int count = 0;
+        boolean getOut;
         for(Element e : list){
-            System.out.println(e.text());
+            if(count >= amount){
+                break;
+            } else {
+                count++;
+                System.out.println(e.text());
+            }
         }
     }
 }

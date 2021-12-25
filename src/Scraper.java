@@ -11,6 +11,8 @@ public class Scraper {
   private Document html;
   private String link = "https://nyaa.si/";
 
+  //TODO: automatic page turn to scrape 4-5 pages
+
   public void resetLink() throws IOException {
     connectLink(link.substring(0, 16));
   }

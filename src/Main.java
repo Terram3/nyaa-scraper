@@ -21,7 +21,11 @@ public class Main {
         System.out.print(menu);
         while (temp) {
             System.out.print("New command input: ");
-            alternative = scan.nextInt();
+            try {
+                alternative = scan.nextInt();
+            } catch (Exception e) {
+                alternative = 10;
+            }
             scan.nextLine();
             switch (alternative) {
                 case 1 -> {
@@ -46,14 +50,24 @@ public class Main {
                     System.out.print("Filter by subtag(can be left empty): ");
                     scrape.scrapePageByTag(scan.nextLine());
                 }
-                case 5 -> season.getTitleList();
+                case 5 -> {
+                    season.connectLink();
+                    System.out.println("How many of the top seasonal anime do you want printed?");
+                    try {
+                        season.currentSeason(scan.nextInt(10));
+                    } catch (Exception e) {
+                        season.currentSeason(10);
+                    } finally {
+                        scan.nextLine();
+                    }
+                }
 
                 case 7 -> System.out.print(menu);
                 case 8 -> {
                     temp = false;
                     System.out.println("Thanks for using the program >^_^> :)");
                 }
-                default -> System.out.println("Input not an alternative" + System.lineSeparator() + menu);
+                default -> System.out.println("Input not an alternative");
             }
         }
     }
